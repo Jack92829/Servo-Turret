@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" onmousemove="main(event)">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body, html {
+                margin: 0px;
+                padding: 0px;
+                background-color: #ededed;
+            }
+            .draw {
+                background-color: rgb(37, 41, 49);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 1;
+            }
+            .coords {
+                position: absolute;
+                width: 4em;
+                height: 3em;
+                left: 1%;
+                top: 1.8%;
+                background-color: rgb(35, 38, 59);
+                border-radius: 4px;
+            }
+            .label{
+                position: absolute;
+                width: 100%;
+                height: 48%;
+                color: rgb(196, 196, 196);
+                font-family: sans-serif;
+                font-size: 100%;
+            }
+        </style>
+        <script>
+            function main(event) {
+                let [ctx, width, height] = prepare();
+                
+                let [x, y] = updateValues(event, width, height);
+            
+                draw(x, y, ctx);
+            }
+
+            function prepare() {
+                let canvas = document.getElementById('canvas');
+                canvas.width = screen.width;
+                canvas.height = screen.height - 111;
+                return [canvas.getContext('2d'), canvas.width, canvas.height];
+            }
+
+            function updateValues(event, w, h) {
+                let x = event.layerX;
+                let y = event.layerY;
+                console.log(`X: ${x} \nY: ${y}`)
+                document.getElementById('x').innerHTML = `X: ${x}`;
+                document.getElementById('y').innerHTML = `Y: ${y}`;
+                
+                let content = {
+                    method: "POST",
+                    body: JSON.stringify({"Coordinates": [x, y], "Dimensions": [w, h]}),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+
+                fetch('/setcoords', content)
+                return [x, y];
+            }
+
+            function draw(x, y, ctx) {
+                ctx.beginPath();
+                ctx.strokeStyle = 'red';
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, 689);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.strokeStyle = 'green';
+                ctx.moveTo(0, y);
+                ctx.lineTo(1280, y);
+                ctx.stroke();
+            }
+        </script>
+    </head>
+
+    <body onload="prepare()">
+        <canvas id='canvas' class='draw'>
+
+        </canvas>
+        <div class='coords'>
+            <p id='x' class='label' style='left: 6%; bottom: 10%;'>X: 0</p>
+            <p id='y' class='label' style='left: 6%; top: 20%;'>Y: 0</p>
+        </div>
+    </body>
+</html>
