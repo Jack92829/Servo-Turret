@@ -4,7 +4,7 @@ const app = express();
 var http = require('http').Server(app);
 var socketio = require('socket.io')(http);
 const port = 3000;
-const hostname = '0.0.0.0';
+const hostname = 'your ip here';
 app.use(express.json());
 
 app.get('/', (req, res) => {
