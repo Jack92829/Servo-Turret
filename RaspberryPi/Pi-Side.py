@@ -36,4 +36,4 @@ def receiveData(data):
         servo.stop()
         GPIO.cleanup()
 
-sio.connect('http://192.168.8.103:80/')
+sio.connect('http://IP being hosted on here/')
