@@ -8,7 +8,7 @@ Find your current network IP and insert that into the relevant places labelled i
 
 ### Pi
 Setup the servos on a breadboard as seen below
-![Alt Text](https://github.com/Jack92829/Servo-Turret/blob/pi-info/65118D30-80D6-44CB-8CD5-2ED76DBC9FA7.png)
+![Alt Text](https://github.com/Jack92829/Servo-Turret/blob/master/65118D30-80D6-44CB-8CD5-2ED76DBC9FA7.png)
 
 <p>The left side is ground, and the right is power.</p>
 <p>Connect a wire from the left hand side to pin 6 or a ground pin of your choice.</p>
