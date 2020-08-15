@@ -1,5 +1,6 @@
 # Servo-Turret
 A small servo-turret that can be controlled remotely through a local website hosted on your network
+![Alt Text](https://media.giphy.com/media/MZQW5Kobya95v7uam7/source.mp4)
 
 ## Setup
 ### Server
