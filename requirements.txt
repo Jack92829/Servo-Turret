@@ -1,0 +1,7 @@
+-----Python-----
+- socketio
+- RPi.GPIO
+
+---Javascript---
+- express
+- socket.io
