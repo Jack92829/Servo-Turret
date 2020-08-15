@@ -1,6 +1,6 @@
 # Servo-Turret
 A small servo-turret that can be controlled remotely through a local website hosted on your network.  
-An example can be seen *[here](https://www.reddit.com/r/raspberry_pi/comments/i4k69j/trackpad_controlled_servo_motors/#here "yep right here")*.
+An example can be seen *[here](https://www.reddit.com/r/raspberry_pi/comments/i4k69j/trackpad_controlled_servo_motors "yep right here")*.
 
 ## Setup
 ### Server
