@@ -1,13 +1,27 @@
 import socketio
 import RPi.GPIO as GPIO
 import time
+import signal
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(11, GPIO.OUT)
-servo = GPIO.PWM(11, 50)
-servo.start(0)
-
+GPIO.setup(12, GPIO.OUT)
+servoY = GPIO.PWM(11, 50)
+servoX = GPIO.PWM(12, 50)
+servoX.start(0)
+servoY.start(0)
 sio = socketio.Client()
+
+print('Ready')
+
+def KeyboardInterruptHandle(signal, frame):
+    servoX.ChangeDutyCycle(7)
+    servoY.ChangeDutyCycle(7)
+    time.sleep(2)
+    servoX.stop()
+    servoY.stop()
+    GPIO.cleanup()
+    exit()
 
 def scaleCoordinations(coordinates, dimensions):
     # Scale X
@@ -21,19 +35,14 @@ def scaleCoordinations(coordinates, dimensions):
     return x, y
 
 def rotate(x, y):
-    servo.ChangeDutyCycle(2+(x/18))
-    print(GPIO.output(11))
-
+    servoX.ChangeDutyCycle(2+(x/18))
+    servoY.ChangeDutyCycle(2+(y/18))
 
 @sio.event
 def receiveData(data):
-    try:
-        x, y = scaleCoordinations(data['Coordinates'], data['Dimensions'])
-        rotate(x, y)
-    except KeyboardInterrupt:
-        servo.ChangeDutyCycle(7)
-        time.sleep(0.5)
-        servo.stop()
-        GPIO.cleanup()
+    x, y = scaleCoordinations(data['Coordinates'], data['Dimensions'])
+    print(x, y)
+    rotate(x, y)
 
-sio.connect('http://IP being hosted on here/')
+signal.signal(signal.SIGINT, KeyboardInterruptHandle)
+sio.connect('http://ip here')
