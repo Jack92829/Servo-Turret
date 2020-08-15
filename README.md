@@ -6,5 +6,5 @@ A small servo-turret that can be controlled remotely through a local website hos
 Find your current network IP and insert that into the relevant places labelled in the Server.js and Pi-Side.py files
 
 ### Pi
-I'll fill in this bit later
+![Alt Text](https://github.com/Jack92829/Servo-Turret/blob/pi-info/65118D30-80D6-44CB-8CD5-2ED76DBC9FA7.png)
 
